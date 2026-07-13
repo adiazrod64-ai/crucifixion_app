@@ -7,6 +7,21 @@
   </head>
   <body style="margin:0;">
     <div id="root"></div>
+    <script>
+      window.onerror = function (msg, url, line, col, error) {
+        document.body.innerHTML =
+          '<pre style="white-space:pre-wrap;padding:20px;font-size:13px;color:#b00;background:#fff;">' +
+          msg + '\n' + url + ':' + line + ':' + col + '\n\n' +
+          (error && error.stack ? error.stack : '') +
+          '</pre>';
+      };
+      window.addEventListener('unhandledrejection', function (e) {
+        document.body.innerHTML =
+          '<pre style="white-space:pre-wrap;padding:20px;font-size:13px;color:#b00;background:#fff;">' +
+          (e.reason && e.reason.stack ? e.reason.stack : e.reason) +
+          '</pre>';
+      });
+    </script>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
